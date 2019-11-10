@@ -37,6 +37,7 @@ public:
 	Report();
 	Report(int fi_id, int thirdparty_id, string duediligencedate, string reportdate, string duediligencetype);
 	Report& operator=(Report& other);
+	bool operator==(Report& other);
 	Report(Report& other);
 	//Setters and getters may be implemented in the future - yet if a FI wants to be created it should only be done through the parametrized ctor
 	void printReport(ostream& os);
