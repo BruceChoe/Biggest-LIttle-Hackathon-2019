@@ -36,6 +36,7 @@ public:
 	void printAllUsers();
 
 	std::string randomSalt(); 
+	long int publicKey[50];
 
 private:
 	std::map<std::string, PassInfo> allUserData;
@@ -46,7 +47,7 @@ private:
 	void readFile();
 
 	long int keyModulus, totientFunction, i, flag;
-	long int publicKey[50], publicKeyInverse[50], temp[50], maxValOfKey;
+	long int publicKeyInverse[50], temp[50], maxValOfKey;
 	char encrypted[50], decrypted[50]; // encrypted = private key
 	long int cd(long int a);
 	long int prime(long int pr);

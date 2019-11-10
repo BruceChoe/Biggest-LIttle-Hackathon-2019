@@ -12,7 +12,7 @@ int main() {
 	FI id3("Bombora", 113);
 
 	ThirdParty tp1;
-	ThirdParty tp2(5, "thirdParty1", "Code");
+	ThirdParty tp2(5, "CompanyRiskX", "Financial");
 	ThirdParty tp3;
 
 	Report rep1;
@@ -34,10 +34,12 @@ int main() {
 	int cont = 1;
 	int choice = 0;
 	int index = 0;
-	int privateKey = 0;
+	long int* keyPtr = nullptr;
+	long int key = 0;
 	string fiUser;
 	string fiPass;
 	PasswordManager user;
+	std::stringstream ss;
 	//Blockchain bChain = Blockchain();
 	do
 	{
@@ -54,12 +56,27 @@ int main() {
 				cin >> fiPass;
 				user.firstTimeLogin(fiUser, fiPass);
 				user.generateEncryptionKey(user.encryptPassword(fiPass, user.randomSalt()));
-				user.printAllUsers();
 				break;
 			case 2:
 				// If not new user
-				//If privateKey doesn't exist, create FI & match to FI nam
-				//bChain.AddBlock(Block(index++, FI, ThirdParty, Report
+				cout << "Enter your username: ";
+				cin >> fiUser;
+				cout << "Enter your password: ";
+				cin >> fiPass;
+				user.login(fiUser, fiPass);
+				cout << user.publicKey << endl;
+				/*
+				//cout << user.publicKey[6];
+				//cout << key << endl;
+				//key = *user.publicKey;
+				//user.printAllUsers();
+				
+				for (unsigned i = 0; i < sizeof user.publicKey / sizeof user.publicKey[0]; ++i)
+					ss << user.publicKey[i];
+				ss >> key;
+				cout << key; //603215
+				*/
+				//bChain.AddBlock(Block(index++, key, tp1, rep1));
 				break;
 			case 3:
 				cont = 0;
