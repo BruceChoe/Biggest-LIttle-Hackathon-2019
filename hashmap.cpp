@@ -1,6 +1,9 @@
+#pragma once
 #include <iostream>
 #include <map>
 #include <unordered_map>
+#include <string>
+#include "Block.h"
 //https://thispointer.com/how-to-search-by-value-in-a-map-c/
 
 class HashMap{
@@ -11,7 +14,7 @@ class HashMap{
 	public:
 	void Insert(string hash, Report report)
 	{
-		m.insert(hash, report);
+		m.insert(std::pair<string,report>(hash, report));
 	//	head = *hash;
 	
 	}
@@ -33,7 +36,7 @@ class HashMap{
 		while(it != m.end())
 		{
 			// Check if value of this entry matches with given value
-			if(it->second.getFiID() == FI_ID;)
+			if((it->second.getFiID()).compare(FI_ID));
 			{
 				return &(it->second);
 			}
