@@ -2,9 +2,11 @@
 #include "Blockchain.h"
 
 Blockchain::Blockchain() {
-	Report emptyReport();
-	
-	_vChain.emplace_back(Block(0, "Genesis Block", emptyReport));
+	Report emptyReport;
+	FI emptyFI;
+	ThirdParty emptyThirdParty;
+
+	_vChain.emplace_back(Block(0, emptyFI, emptyThirdParty, emptyReport));
 	_nDifficulty = 6;
 }
 
