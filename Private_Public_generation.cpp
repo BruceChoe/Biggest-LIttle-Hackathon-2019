@@ -6,10 +6,10 @@
 
 using namespace std;
 
-int firstPrime, secondPrime, keyModulus, maxKeySize, i, flag;
-long int e[50], d[50], temp[50], j;
+int firstPrime, secondPrime, keyModulus, totientFunction, i, flag;
+long int publicKey[50], publicKeyInverse[50], temp[50], maxValOfKey;
 char en[50], m[50];
-char msg[100];
+char message[100];
 int prime(long int); //function to check for prime number
 void encryption_key();
 long int cd(long int);
@@ -40,18 +40,18 @@ int main()
    }
 
    cout << "\nENTER MESSAGE OR STRING TO ENCRYPT\n";
-   cin >> msg;
+   cin >> message;
 
-   for(i = 0; msg[i] != NULL; i++)
-      m[i] = msg[i];
+   for(i = 0; message[i] != NULL; i++)
+      m[i] = message[i];
    keyModulus = firstPrime * secondPrime;
-   maxKeySize = (firstPrime - 1) * (secondPrime - 1);
+   totientFunction = (firstPrime - 1) * (secondPrime - 1);
 
    encryption_key();
-   cout << "\nPOSSIBLE VALUES OF e AND d ARE\n";
+   cout << "\nPOSSIBLE VALUES OF publicKey AND publicKeyInverse ARE\n";
 
-   for(i = 0; i < j - 1; i++)
-      cout << "\n" << e[i] << "\t" << d[i];
+   for(i = 0; i < maxValOfKey - 1; i++)
+      cout << "\n" << publicKey[i] << "\t" << publicKeyInverse[i];
 
    encrypt();
    decrypt();
@@ -61,8 +61,8 @@ int main()
 int prime(long int pr)
 {
    int i;
-   j = sqrt(pr);
-   for(i = 2; i <= j; i++)
+   maxValOfKey = sqrt(pr);
+   for(i = 2; i <= maxValOfKey; i++)
    {
       if(pr % i == 0)
          return 0;
@@ -73,23 +73,23 @@ int prime(long int pr)
 //function to generate encryption key
 void encryption_key()
 {
-   int k;
-   k = 0;
-   for(i = 2; i < maxKeySize; i++)
+   int key;
+   key = 0;
+   for(i = 2; i < totientFunction; i++)
    {
-      if(maxKeySize % i == 0)
+      if(totientFunction % i == 0)
          continue;
       flag = prime(i);
       if(flag == 1 && i != firstPrime && i != secondPrime)
       {
-         e[k] = i;
-         flag = cd(e[k]);
+         publicKey[key] = i;
+         flag = cd(publicKey[key]);
          if(flag > 0)
          {
-            d[k] = flag;
-            k++;
+            publicKeyInverse[key] = flag;
+            key++;
          }
-         if(k == 99)
+         if(key == 99)
          break;
       }
    }
@@ -97,34 +97,34 @@ void encryption_key()
 
 long int cd(long int a)
 {
-   long int k = 1;
+   long int key = 1;
    while(1)
    {
-      k = k + maxKeySize;
-      if(k % a == 0)
-         return(k/a);
+      key = key + totientFunction;
+      if(key % a == 0)
+         return(key/a);
    }
 }
 
 //function to encrypt the message
 void encrypt()
 {
-   long int pt, ct, key = e[0], k, len;
+   long int pt, ct, key = publicKey[0], key, len;
    i = 0;
-   len = strlen(msg);
+   len = strlen(message);
 
    while(i != len)
    {
       pt = m[i];
       pt = pt - 96;
-      k = 1;
-      for(j = 0; j < key; j++)
+      key = 1;
+      for(maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
       {
-         k = k * pt;
-         k = k % keyModulus;
+         key = key * pt;
+         key = key % keyModulus;
       }
-      temp[i] = k;
-      ct= k + 96;
+      temp[i] = key;
+      ct= key + 96;
       en[i] = ct;
       i++;
    }
@@ -137,18 +137,18 @@ void encrypt()
 //function to decrypt the message
 void decrypt()
 {
-   long int pt, ct, key = d[0], k;
+   long int pt, ct, key = publicKeyInverse[0], key;
    i = 0;
    while(en[i] != -1)
    {
       ct = temp[i];
-      k = 1;
-      for(j = 0; j < key; j++)
+      key = 1;
+      for(maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
       {
-         k = k * ct;
-         k = k % keyModulus;
+         key = key * ct;
+         key = key % keyModulus;
       }
-      pt = k + 96;
+      pt = key + 96;
       m[i] = pt;
       i++;
    }
