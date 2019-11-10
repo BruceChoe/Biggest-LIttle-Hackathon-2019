@@ -35,7 +35,7 @@ class HashMap{
 		while(it != m.end())
 		{
 			// Check if value of this entry matches with given value
-			if(it.second.getFiID()==FI_ID)
+			if((it->second.getFiID())==FI_ID)
 			{
 				return &(it->second);
 			}
