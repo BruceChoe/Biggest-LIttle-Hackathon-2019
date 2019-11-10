@@ -24,14 +24,14 @@ class HashMap{
 		auto temp = m.at[location];
 		return temp->second;
 	}
-	Report* SearchByValue(Report report)
+	Report* SearchByID(string FI_ID)
 	{
 		auto it = m.begin();
 		// Iterate through the map
 		while(it != m.end())
 		{
 			// Check if value of this entry matches with given value
-			if(it->second == report)
+			if(it->second.getFiID() == FI_ID;)
 			{
 				return &(it->second);
 			}
