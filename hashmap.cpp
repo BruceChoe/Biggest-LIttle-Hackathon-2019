@@ -28,14 +28,14 @@ class HashMap{
 		return temp->second;
 	}
 	*/
-	Report* SearchByID(string FI_ID)
+	Report* SearchByID(int FI_ID)
 	{
 		auto it = m.begin();
 		// Iterate through the map
 		while(it != m.end())
 		{
 			// Check if value of this entry matches with given value
-			if((it->second.getFiID()).compare(FI_ID));
+			if(it.second.getFiID()==FI_ID)
 			{
 				return &(it->second);
 			}
