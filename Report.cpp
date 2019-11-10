@@ -52,3 +52,7 @@ int Report::getFiID() {
 int Report::getTpID() {
 	return ThirdParty_ID;
 }
+bool Report::operator==(Report& other)
+{
+	return FI_ID == other.FI_ID && ThirdPartyID==other.ThirdPartyID &&  duediligenceDate.compare(other. duediligenceDate) && reportDate.compare(other.reportDate) && duediligenceType.comare(other.duediligenceType);
+}
