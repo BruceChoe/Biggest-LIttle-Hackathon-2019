@@ -14,10 +14,10 @@ PasswordManager::~PasswordManager()
 	writeFile();
 }
 
-void PasswordManager::firstTimeLogin(std::string user, std::string pass)
+bool PasswordManager::firstTimeLogin(std::string user, std::string pass)
 {
-	//std::string salt = randomSalt();
-
+	addUser(user, pass);
+	return login(user, pass);
 }
 
 bool PasswordManager::login(std::string user, std::string pass)
@@ -53,6 +53,14 @@ void PasswordManager::removeUser(std::string user)
 	if (givenUser != allUserData.end())
 	{
 		allUserData.erase(givenUser);
+	}
+}
+
+void PasswordManager::printAllUsers()
+{
+	for (auto it = allUserData.begin(); it != allUserData.end(); it++)
+	{
+		std::cout << it->first << " " << it->second << "\n";
 	}
 }
 

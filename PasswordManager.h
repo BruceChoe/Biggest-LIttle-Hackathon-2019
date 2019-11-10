@@ -25,15 +25,14 @@ public:
 	PasswordManager();
 	~PasswordManager();
 
-	void firstTimeLogin(std::string user, std::string pass);
+	bool firstTimeLogin(std::string user, std::string pass);
 	bool login(std::string user, std::string pass);
 
 	void addUser(std::string user, std::string pass);
 	void addUser(std::string user, std::string salt, std::string encryptedPassword);
 	void removeUser(std::string user);
 
-	void writeFile();
-	void readFile();
+	void printAllUsers();
 
 private:
 	std::map<std::string, PassInfo> allUserData;
@@ -41,4 +40,7 @@ private:
 	//PassInfo encrypt(std::string user, std::string pass);
 	std::string encryptPassword(std::string password, std::string salt);
 	std::string randomSalt();
+
+	void writeFile();
+	void readFile();
 };
