@@ -109,24 +109,24 @@ long int cd(long int a)
 //function to encrypt the message
 void encrypt()
 {
-   long int pt, ct, key = publicKey[0], key, len;
+   long int pt, ct, key = publicKey[0], actualKey, len;
    i = 0;
    len = strlen(message);
 
    while(i != len)
    {
-      pt = decrypted[i];
+      pt = static_cast<long int>(decrypted[i]);
       pt = pt - 96;
-      key = 1;
+      actualKey = 1;
       for(maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
       {
-         key = key * pt;
-         key = key % keyModulus;
+         actualKey = actualKey * pt;
+         actualKey = actualKey % keyModulus;
       }
-      temp[i] = key;
-      ct= key + 96;
-      encrypted[i] = ct;
-      i++; 																				   
+      temp[i] = actualKey;
+      ct= actualKey + 96;
+      encrypted[i] = static_cast<char>(ct);
+      i++; 																						//64 112 128 140 152
    }
    encrypted[i] = -1;
    cout << "\n\nTHE ENCRYPTED MESSAGE IS\n";
@@ -137,19 +137,19 @@ void encrypt()
 //function to decrypt the message
 void decrypt()
 {
-   long int pt, ct, key = publicKeyInverse[0], key;
+   long int pt, ct, key = publicKeyInverse[0], actualKey;
    i = 0;
    while(encrypted[i] != -1)
    {
       ct = temp[i];
-      key = 1;
+      actualKey = 1;
       for(maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
       {
-         key = key * ct;
-         key = key % keyModulus;
+         actualKey = actualKey * ct;
+         actualKey = actualKey % keyModulus;
       }
-      pt = key + 96;
-      decrypted[i] = itoa(pt);
+      pt = actualKey + 96;
+      decrypted[i] = static_cast<char>(pt);
       i++;
    }
    decrypted[i] = -1;
