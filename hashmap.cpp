@@ -6,15 +6,16 @@
 class HashMap{
 	private: 
 	std::map<std::string,Report> m;
-	string *head;
-	int size;
+	//string *head;
+	
 	public:
 	void Insert(string hash, Report report)
 	{
 		m.insert(hash, report);
-		head = *hash;
-		size++;
+	//	head = *hash;
+	
 	}
+	/*
 	Report* Search(string hash)
 	{
 		auto location = m.find(hash);
@@ -24,6 +25,7 @@ class HashMap{
 		auto temp = m.at[location];
 		return temp->second;
 	}
+	*/
 	Report* SearchByID(string FI_ID)
 	{
 		auto it = m.begin();
