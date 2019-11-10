@@ -19,10 +19,25 @@ class HashMap{
 	{
 		auto location = m.find(hash);
 		
-		Report r = location.second;
+		//Report *r = location.second;
 		
-		temp = m.at[location];
-		return temp;
+		auto temp = m.at[location];
+		return temp->second;
+	}
+	Report* SearchByValue(Report report)
+	{
+		auto it = m.begin();
+		// Iterate through the map
+		while(it != m.end())
+		{
+			// Check if value of this entry matches with given value
+			if(it->second == report)
+			{
+				return &(it->second);
+			}
+			// Go to next entry in map
+			it++;
+		}
 	}
 	
 };
