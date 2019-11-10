@@ -3,14 +3,14 @@
 #include<stdlib.h>
 #include<math.h>
 #include<string.h>
-
+#include<stdio.h>
 using namespace std;
 
-int firstPrime, secondPrime, keyModulus, totientFunction, i, flag;
+long int firstPrime, secondPrime, keyModulus, totientFunction, i, flag;
 long int publicKey[50], publicKeyInverse[50], temp[50], maxValOfKey;
-char en[50], m[50];
+char encrypted[50], decrypted[50];
 char message[100];
-int prime(long int); //function to check for prime number
+long int prime(long int); //function to check for prime number
 void encryption_key();
 long int cd(long int);
 void encrypt();
@@ -43,7 +43,7 @@ int main()
    cin >> message;
 
    for(i = 0; message[i] != NULL; i++)
-      m[i] = message[i];
+      decrypted[i] = message[i];
    keyModulus = firstPrime * secondPrime;
    totientFunction = (firstPrime - 1) * (secondPrime - 1);
 
@@ -58,9 +58,9 @@ int main()
    return 0;
 } //end of the main program
 
-int prime(long int pr)
+long int prime(long int pr)
 {
-   int i;
+   long int i;
    maxValOfKey = sqrt(pr);
    for(i = 2; i <= maxValOfKey; i++)
    {
@@ -73,7 +73,7 @@ int prime(long int pr)
 //function to generate encryption key
 void encryption_key()
 {
-   int key;
+   long int key;
    key = 0;
    for(i = 2; i < totientFunction; i++)
    {
@@ -115,7 +115,7 @@ void encrypt()
 
    while(i != len)
    {
-      pt = m[i];
+      pt = decrypted[i];
       pt = pt - 96;
       key = 1;
       for(maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
@@ -125,13 +125,13 @@ void encrypt()
       }
       temp[i] = key;
       ct= key + 96;
-      en[i] = ct;
-      i++;
+      encrypted[i] = ct;
+      i++; 																				   
    }
-   en[i] = -1;
+   encrypted[i] = -1;
    cout << "\n\nTHE ENCRYPTED MESSAGE IS\n";
-   for(i=0; en[i] != -1; i++)
-      cout << en[i];
+   for(i=0; encrypted[i] != -1; i++)
+      cout << encrypted[i];
 }
 
 //function to decrypt the message
@@ -139,7 +139,7 @@ void decrypt()
 {
    long int pt, ct, key = publicKeyInverse[0], key;
    i = 0;
-   while(en[i] != -1)
+   while(encrypted[i] != -1)
    {
       ct = temp[i];
       key = 1;
@@ -149,13 +149,13 @@ void decrypt()
          key = key % keyModulus;
       }
       pt = key + 96;
-      m[i] = pt;
+      decrypted[i] = itoa(pt);
       i++;
    }
-   m[i] = -1;
+   decrypted[i] = -1;
    cout << "\n\nTHE DECRYPTED MESSAGE IS\n";
-   for(i = 0; m[i] != -1; i++)
-      cout << m[i];
+   for(i = 0; decrypted[i] != -1; i++)
+      cout << decrypted[i];
 
   cout << endl;
 }
