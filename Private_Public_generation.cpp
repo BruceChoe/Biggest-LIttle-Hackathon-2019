@@ -1,4 +1,6 @@
 //C++ program for encryption and decryption
+
+//FIle is unnecessary for completion, just a WIP file for generating keys 
 #include<iostream>
 #include<stdlib.h>
 #include<math.h>
