@@ -159,10 +159,11 @@ void PasswordManager::generateEncryptionKey(std::string encryptedPass)
 			 break;
 		}//endif
 	} //endfor
-	long int pt, ct, actualKey, len;
+	long int pt, ct, actualKey;
+	int len;
 	key = publicKey[0];
 	i = 0;
-	len = strlen(message);
+	len = strlen(encryptedPass);
 
 	while(i != len)
 	{
