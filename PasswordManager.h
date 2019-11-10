@@ -49,4 +49,6 @@ private:
 	long int publicKey[50], publicKeyInverse[50], temp[50], maxValOfKey;
 	char encrypted[50], decrypted[50];
 	long int cd(long int a);
+	long int prime(long int pr);
+
 };
