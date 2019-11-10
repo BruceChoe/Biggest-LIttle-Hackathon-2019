@@ -198,7 +198,7 @@ void PasswordManager::generateEncryptionKey(std::string encryptedPass)
    decrypted[i] = -1;
 	
 }//end generateEncryptionKey
-long int cd(long int a)
+long int PasswordManager::cd(long int a)
 {
 	long int key = 1;
 	while(1)
@@ -208,4 +208,14 @@ long int cd(long int a)
 		 return(key/a);
 	}	
 }
-
+long int PasswordManager::prime(long int pr)
+{
+   long int i;
+   maxValOfKey = sqrt(pr);
+   for(i = 2; i <= maxValOfKey; i++)
+   {
+      if(pr % i == 0)
+         return 0;
+   }
+   return 1;
+ }
