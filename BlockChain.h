@@ -8,12 +8,12 @@ using namespace std;
 class Blockchain {
 public:
 	Blockchain();
-
+    Block _GetLastBlock() const;
 	void AddBlock(Block bNew);
 	HashMap myMap;
 private:
 	uint32_t _nDifficulty;
 	vector<Block> _vChain;
-	Block _GetLastBlock() const;
+
 };
 #endif

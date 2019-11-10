@@ -44,7 +44,18 @@ public:
 	int getFiID();
 	int getTpID();
 	//string getThirdPartyName(); Maybe later? 
-
+    string getDDD()
+    {
+        return duediligenceDate;
+    }
+    string getDDT()
+    {
+        return duediligenceType;
+    }
+    string getDate()
+    {
+        return reportDate;
+    }
 };
 #endif //REPORT_H
 
