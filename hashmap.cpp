@@ -14,7 +14,7 @@ class HashMap{
 	public:
 	void Insert(string hash, Report report)
 	{
-		m.insert(std::pair<string,report>(hash, report));
+		m.emplace(hash, report);
 	//	head = *hash;
 	
 	}
