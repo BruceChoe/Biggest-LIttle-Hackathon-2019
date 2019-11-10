@@ -41,7 +41,8 @@ public:
 	//Setters and getters may be implemented in the future - yet if a FI wants to be created it should only be done through the parametrized ctor
 	void printReport(ostream& os);
 
-	//string getFIName();
+	int getFiID();
+	int getTpID();
 	//string getThirdPartyName(); Maybe later? 
 
 };

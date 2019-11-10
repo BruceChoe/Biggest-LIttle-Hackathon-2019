@@ -27,3 +27,11 @@ string ThirdParty::getService()
 {
 	return serviceType;
 }
+
+ThirdParty& ThirdParty::operator=(ThirdParty& other)
+{
+	name = other.name;
+	ID = other.ID;
+	serviceType = other.serviceType;
+	return *this;
+}

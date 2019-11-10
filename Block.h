@@ -16,9 +16,12 @@ using namespace std;
 class Block {
 public:
 	string sPrevHash;
+	//Block();
+	Block(uint32_t nIndexIn, Report& rReportDocsIn);
 	Block(uint32_t nIndexIn, FI& fiID, ThirdParty& tpID, Report& rReportDocsIn);
 	string GetHash();
 	void MineBlock();
+	uint32_t getIndex();
 
 private:
 	uint32_t _nIndex;

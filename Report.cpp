@@ -44,3 +44,11 @@ void Report::printReport(ostream& os)
 	os << "Type of due diligence: " << duediligenceType << std::endl;
 
 }
+
+int Report::getFiID() {
+	return FI_ID;
+}
+
+int Report::getTpID() {
+	return ThirdParty_ID;
+}

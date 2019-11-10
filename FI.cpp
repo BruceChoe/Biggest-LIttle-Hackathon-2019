@@ -23,3 +23,10 @@ string FI::getName()
 {
 	return name;
 }
+
+FI& FI::operator=(FI& other)
+{
+	name = other.name;
+	ID = other.ID;
+	return *this;
+}

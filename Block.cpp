@@ -6,7 +6,28 @@
 #include "FI.h"
 #include "ThirdParty.h"
 #include "Report.h"
-#define nDifficulty 2
+#define nDifficulty 4
+
+/*
+Block::Block()
+{
+	_nIndex = -1;
+	ThirdParty dtpID;
+	FI deffID;
+	Report defDocs;
+	fiID = deffID;
+	tpID = dtpID;
+	reportDocs = defDocs;
+}
+*/
+
+/*
+Block::Block(uint32_t nIndexIn, Report& rReportDocsIn)
+	: _nIndex(nIndexIn), fiID(rReportDocsIn.FI_ID), tpID(rReportDocsIn.ThirdParty_ID), reportDocs(rReportDocsIn)
+{
+
+}
+*/
 
 Block::Block(uint32_t nIndexIn, FI& fiIDIn, ThirdParty& tpIDIn, Report& rReportDocsIn)
 	: _nIndex(nIndexIn), fiID(fiIDIn), tpID(tpIDIn), reportDocs(rReportDocsIn)
@@ -40,4 +61,9 @@ inline string Block::_CalculateHash() const {
 	std::stringstream ss;
 	ss << _nIndex << _tTime << _nNonce << sPrevHash << fiID.getID() << tpID.getID();
 	return sha256(ss.str());
+}
+
+uint32_t Block::getIndex() {
+	return _nIndex;
+
 }

@@ -26,6 +26,7 @@ public:
 
 	int getID();
 	string getName();
+	FI& operator=(FI& other);
 
 
 };

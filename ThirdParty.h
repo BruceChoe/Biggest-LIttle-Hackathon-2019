@@ -25,6 +25,8 @@ public:
 	int getID();
 	string getName();
 	string getService();
+
+	ThirdParty& operator=(ThirdParty& other);
 };
 #endif //THIRDPARTY_H
 

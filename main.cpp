@@ -1,8 +1,10 @@
 #pragma once
 #include "Blockchain.h"
 #include "PasswordManager.h"
-#include <stdio.h>
+#include <iostream>
 
+using std::cout;
+using std::cin;
 int main() {
 	Blockchain bChain = Blockchain();
 	FI id1;
@@ -29,46 +31,43 @@ int main() {
 	rep2.printReport(std::cout);
 	cout << endl;
 
-	int continue = 1;
+	int cont = 1;
 	int choice = 0;
 	int index = 0;
 	int privateKey = 0;
 	string fiUser;
 	string fiPass;
-	Blockchain bChain = Blockchain();
+	PasswordManager user;
+	//Blockchain bChain = Blockchain();
 	do
 	{
 		cout << "Welcome to the BlockChain" << endl;
-		cout << "Options: " << endl << "1) New User" << endl << "2) Add to Chain" << endl << "3) Exit" << endl << "Select choice: ;
-		cin << choice;
+		cout << "Options: " << endl << "1) New User" << endl << "2) Add to Chain" << endl << "3) Exit" << endl << "Select choice: ";
+		cin >> choice;
 		switch (choice) {
 			case 1:
 				// add to chain
 				// If new user
 				cout << "Enter your financial institution's name: ";
-				cin << fiUser;
+				cin >> fiUser;
 				cout << "Enter a password for your institution: ";
-				cin << fiPass;
-				PasswordManager user;
+				cin >> fiPass;
 				user.firstTimeLogin(fiUser, fiPass);
-				user.generateEncryptionKey(user.encryptPassword(fiPass, randomSalt));
+				user.generateEncryptionKey(user.encryptPassword(fiPass, user.randomSalt()));
+				user.printAllUsers();
 				break;
 			case 2:
 				// If not new user
-				cout << "Enter your private key" << endl;
-				cin << privateKey << endl;
-				//If privateKey doesn't exist, create FI & match to FI name. 
-				cin << 
-				bChain.AddBlock(Block(index++, FI, ThirdParty, Report
+				//If privateKey doesn't exist, create FI & match to FI nam
+				//bChain.AddBlock(Block(index++, FI, ThirdParty, Report
 				break;
 			case 3:
-				continue = 0;
+				cont = 0;
 				break;
 			default:
 				break;
 		}
 	}
-	while(continue == 1);
-	*/
+	while(cont == 1);
 	return 0;
 }
