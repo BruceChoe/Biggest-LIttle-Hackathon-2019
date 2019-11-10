@@ -27,9 +27,6 @@ int main() {
 
 	cout << "Mining block 3..." << endl;
 	bChain.AddBlock(Block(3, id3, tp3, rep3));
-	rep1.printReport(std::cout);
-	rep2.printReport(std::cout);
-	cout << endl;
 
 	int cont = 1;
 	int choice = 0;
@@ -58,25 +55,19 @@ int main() {
 				user.generateEncryptionKey(user.encryptPassword(fiPass, user.randomSalt()));
 				break;
 			case 2:
-				// If not new user
+
 				cout << "Enter your username: ";
 				cin >> fiUser;
 				cout << "Enter your password: ";
 				cin >> fiPass;
 				user.login(fiUser, fiPass);
-				cout << user.publicKey << endl;
-				/*
-				//cout << user.publicKey[6];
-				//cout << key << endl;
-				//key = *user.publicKey;
-				//user.printAllUsers();
-				
-				for (unsigned i = 0; i < sizeof user.publicKey / sizeof user.publicKey[0]; ++i)
-					ss << user.publicKey[i];
-				ss >> key;
-				cout << key; //603215
-				*/
-				//bChain.AddBlock(Block(index++, key, tp1, rep1));
+				ss << user.publicKey;
+				ss >> fiUser;
+				id1.setName(fiUser);
+				id1.setID(10);
+				cout << fiUser;
+				bChain.AddBlock(Block(index++, id1, tp1, rep1));
+				bChain.myMap.printMap(std::cout);
 				break;
 			case 3:
 				cont = 0;

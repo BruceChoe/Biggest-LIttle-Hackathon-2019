@@ -21,9 +21,7 @@ public:
 	Report* Search(string hash)
 	{
 		auto location = m.find(hash);
-
 		//Report *r = location.second;
-
 		auto temp = m.at[location];
 		return temp->second;
 	}
@@ -43,5 +41,12 @@ public:
 			it++;
 		}
 	}
-
+	void printMap(ostream& os)
+	{
+		std::map<std::string, Report>::iterator it = m.begin();
+		while (it != m.end()) {
+			it->second.printReport(os);
+			it++;
+		}
+	}
 };

@@ -14,6 +14,7 @@ void Blockchain::AddBlock(Block bNew) {
 	bNew.sPrevHash = _GetLastBlock().GetHash();
 	bNew.MineBlock();
 	_vChain.push_back(bNew);
+	myMap.Insert(bNew.GetHash(), bNew.getReport());
 }
 
 Block Blockchain::_GetLastBlock() const {

@@ -48,7 +48,6 @@ void Block::MineBlock() {
 	cstr[nDifficulty] = '\0';
 
 	string str(cstr);
-
 	do {
 		_nNonce++;
 		_sHash = _CalculateHash();
@@ -65,5 +64,8 @@ inline string Block::_CalculateHash() const {
 
 uint32_t Block::getIndex() {
 	return _nIndex;
+}
 
+Report& Block::getReport() {
+	return reportDocs;
 }

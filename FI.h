@@ -27,7 +27,7 @@ public:
 	int getID();
 	string getName();
 	FI& operator=(FI& other);
-
-
+	void setName(string);
+	void setID(int);
 };
 #endif FI_H

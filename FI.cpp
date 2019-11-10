@@ -30,3 +30,11 @@ FI& FI::operator=(FI& other)
 	ID = other.ID;
 	return *this;
 }
+
+void FI::setName(string newName) {
+	name = newName;
+}
+
+void FI::setID(int newID) {
+	ID = newID;
+}

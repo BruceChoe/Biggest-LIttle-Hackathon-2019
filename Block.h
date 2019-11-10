@@ -22,7 +22,7 @@ public:
 	string GetHash();
 	void MineBlock();
 	uint32_t getIndex();
-
+	Report& getReport();
 private:
 	uint32_t _nIndex;
 	int64_t _nNonce;
