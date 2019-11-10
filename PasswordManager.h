@@ -40,7 +40,13 @@ private:
 	//PassInfo encrypt(std::string user, std::string pass);
 	std::string encryptPassword(std::string password, std::string salt);
 	std::string randomSalt();
-
+	
 	void writeFile();
 	void readFile();
+	
+	void generateEncryptionKey(std::string encryptedPass); //Two different keys will be made using this hashing method
+	long int keyModulus, totientFunction, i, flag;
+	long int publicKey[50], publicKeyInverse[50], temp[50], maxValOfKey;
+	char encrypted[50], decrypted[50];
+	long int cd(long int a);
 };
