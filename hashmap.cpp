@@ -60,5 +60,11 @@ class HashMap{
 			it++;
 		}
 	}
+	void printMap(ostream & os)
+	{
+		for(int i = 0; i < m.size(); i++)
+			os << "Report data:" << m.second.printReport(os);
+	}
+	
 	
 };
