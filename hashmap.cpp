@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <string>
 #include "Block.h"
-//https://thispointer.com/how-to-search-by-value-in-a-map-c/
 
 class HashMap{
 	private: 
