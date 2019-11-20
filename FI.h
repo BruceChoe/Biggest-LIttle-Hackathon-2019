@@ -26,31 +26,8 @@ public:
 
 	int getID();
 	string getName();
-
-
+	FI& operator=(FI& other);
+	void setName(string);
+	void setID(int);
 };
 #endif FI_H
-
-FI::FI()
-{
-	name = "INVALID";
-	ID = 0;
-}
-FI::FI(string FIName, int id)
-{
-	name = FIName;
-	ID = id;
-}
-Report FI::MakeReport(int thirdPartyID, string dueDiligenceDate, string dateOfReport, string reportType) //Make the report
-{
-	Report report(ID, thirdPartyID, dueDiligenceDate, dateOfReport, reportType); //Calls the parametrized ctor of report in order to make it
-	return report;
-}
-int FI::getID()
-{
-	return ID;
-}
-string FI::getName()
-{
-	return name;
-}

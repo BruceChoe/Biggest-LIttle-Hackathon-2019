@@ -8,8 +8,29 @@
 #include "Report.h"
 #define nDifficulty 4
 
-Block::Block(uint32_t nIndexIn, const string& sDataIn, Report& rReportDocsIn)
-	: _nIndex(nIndexIn), _sData(sDataIn), reportDocs(rReportDocsIn)
+/*
+Block::Block()
+{
+	_nIndex = -1;
+	ThirdParty dtpID;
+	FI deffID;
+	Report defDocs;
+	fiID = deffID;
+	tpID = dtpID;
+	reportDocs = defDocs;
+}
+*/
+
+/*
+Block::Block(uint32_t nIndexIn, Report& rReportDocsIn)
+	: _nIndex(nIndexIn), fiID(rReportDocsIn.FI_ID), tpID(rReportDocsIn.ThirdParty_ID), reportDocs(rReportDocsIn)
+{
+
+}
+*/
+
+Block::Block(uint32_t nIndexIn, FI& fiIDIn, ThirdParty& tpIDIn, Report& rReportDocsIn)
+	: _nIndex(nIndexIn), fiID(fiIDIn), tpID(tpIDIn), reportDocs(rReportDocsIn)
 {
 	_nNonce = -1;
 	_tTime = time(nullptr);
@@ -27,7 +48,6 @@ void Block::MineBlock() {
 	cstr[nDifficulty] = '\0';
 
 	string str(cstr);
-
 	do {
 		_nNonce++;
 		_sHash = _CalculateHash();
@@ -38,7 +58,14 @@ void Block::MineBlock() {
 
 inline string Block::_CalculateHash() const {
 	std::stringstream ss;
-	ss << _nIndex << _tTime << _sData << _nNonce << sPrevHash;
-
+	ss << _nIndex << _tTime << _nNonce << sPrevHash << fiID.getID() << tpID.getID();
 	return sha256(ss.str());
+}
+
+uint32_t Block::getIndex() {
+	return _nIndex;
+}
+
+Report& Block::getReport() {
+	return reportDocs;
 }
