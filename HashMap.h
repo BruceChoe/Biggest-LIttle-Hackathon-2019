@@ -12,9 +12,9 @@ private:
 	string tail; 
 	
 public:
-	void Insert(string hash, Report report)
+	void Insert(string hash, DataType data)
 	{
-		m.emplace(hash, report);
+		m.emplace(hash, data);
 		tail = hash;
 
 	}
