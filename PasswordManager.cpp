@@ -1,11 +1,11 @@
-#include "PasswordManager.h"
+#include "Keys.h"
 #include "picosha2.h"
 #include <random>
 #include <ctime>
 #include <iostream>
 
 template <class DataType>
-void PasswordManager<DataType>::generateEncryptionKey(std::string hash)
+void Keys<DataType>::generateEncryptionKey(std::string hash)
 {
 	long int firstPrime, secondPrime;
 	firstPrime = 12809;
@@ -77,7 +77,7 @@ void PasswordManager<DataType>::generateEncryptionKey(std::string hash)
 
 
 template <class DataType>
-long int PasswordManager<DataType>::cd(long int a)
+long int Keys<DataType>::cd(long int a)
 {
 	long int key = 1;
 	while (1)
@@ -89,7 +89,7 @@ long int PasswordManager<DataType>::cd(long int a)
 }
 
 template <class DataType>
-long int PasswordManager<DataType>::prime(long int pr)
+long int Keys<DataType>::prime(long int pr)
 {
 	long int i;
 	maxValOfKey = sqrt(pr);
