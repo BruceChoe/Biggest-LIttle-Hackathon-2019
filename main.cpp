@@ -21,6 +21,7 @@ int main()
     int option;    
     int i = 1; //i is an iterator for the position in the block chain
     do {
+        cout << "\n\n";
         cout << "Your keys:\n";
         cout << "Public Key: " << publicKey << "\n";
         cout << "Private Key:" << privateKey << "\n";
@@ -29,6 +30,7 @@ int main()
         cin >> option;
         int key; //This is the key that they are going to manually insert
         int value;
+        cout << "\n\n";
         
         switch (option)
         {
