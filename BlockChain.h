@@ -13,7 +13,7 @@ class Blockchain {
 public:
 	Blockchain();
     	Block<DataType> _GetLastBlock() const;
-	void AddBlock(Block<DataType> bNew);
+	void AddBlock(Block<DataType> & bNew);
 	HashMap<DataType> myMap;
 private:
 	uint32_t _nDifficulty;
