@@ -14,7 +14,7 @@ public:
 
 private:
 	
-	long int keyModulus, totientFunction, i, flag;
+	long int keyModulus, totientFunction, i, flag; // i is just any iterator
 	long int publicKeyInverse[50], temp[50], maxValOfKey;
 	char encrypted[50], decrypted[50]; // encrypted = private key
 	long int cd(long int a);
