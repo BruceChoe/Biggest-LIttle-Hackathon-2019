@@ -1,5 +1,4 @@
 #include "Keys.h"
-#include "picosha2.h"
 #include <random>
 #include <ctime>
 #include <iostream>
