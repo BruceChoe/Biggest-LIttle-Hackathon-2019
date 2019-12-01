@@ -1,22 +1,20 @@
-#pragma once
-#include "Blockchain.h"
+template <typename DataType>
+Blockchain<DataType>::Blockchain() {
+	DataType data;
 
-Blockchain::Blockchain() {
-	Report emptyReport;
-	FI emptyFI;
-	ThirdParty emptyThirdParty;
-
-	_vChain.emplace_back(Block(0, emptyFI, emptyThirdParty, emptyReport));
+	_vChain.emplace_back(Block(0, data));
 	_nDifficulty = 6;
 }
 
-void Blockchain::AddBlock(Block bNew) {
+template <typename DataType>
+void Blockchain<DataType>::AddBlock(Block<DataType> bNew) {
 	bNew.sPrevHash = _GetLastBlock().GetHash();
 	bNew.MineBlock();
 	_vChain.push_back(bNew);
-	myMap.Insert(bNew.GetHash(), bNew.getReport());
+	myMap.Insert(bNew.GetHash(), bNew.getData());
 }
 
-Block Blockchain::_GetLastBlock() const {
+template <typename DataType>
+Block<DataType> Blockchain<DataType>::_GetLastBlock() const {
 	return _vChain.back();
 }

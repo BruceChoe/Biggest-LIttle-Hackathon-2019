@@ -1,19 +1,25 @@
 #ifndef BLOCK_CHAIN
 #define BLOCK_CHAIN
+
 #include <cstdint>
 #include <vector>
 #include "Block.h"
 #include "HashMap.cpp"
+
 using namespace std;
+
+template <typename DataType>
 class Blockchain {
 public:
 	Blockchain();
-    Block _GetLastBlock() const;
-	void AddBlock(Block bNew);
-	HashMap myMap;
+    Block<DataType> _GetLastBlock() const;
+	void AddBlock(Block<DataType> bNew);
+	HashMap<DataType> myMap;
 private:
 	uint32_t _nDifficulty;
-	vector<Block> _vChain;
-
+	vector<Block<DataType>> _vChain;
 };
+
+#include "BlockChain.cpp"
+
 #endif
