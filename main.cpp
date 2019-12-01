@@ -1,38 +1,49 @@
 #include <iostream>
+#include <fstream>
 #include "BlockChain.h"
 
-template <typename DataType> void printBlock(Block<DataType> & b);
+const char * FILENAME = "blocks.txt";
+
+template <typename DataType> void printBlocks(std::vector<Block<DataType>> & vec);
+template <typename DataType> void writeFile(std::vector<Block<DataType>> & vec);
 
 int main()
 {
-    //create blockchain
-    //add some blocks
-    //print them out
-
     Blockchain<int> blockchain;
+    std::vector<Block<int>> blocks;
+    int data = 16;
 
-    int a = 16;
-    int b = 32;
-    int c = 64;
+    for (int i = 1; i <= 3; i++)
+    {
+        data = data * i;
+        Block<int> temp(i, data);
+        blockchain.AddBlock(temp);
+        blocks.push_back(temp);
+    }
 
-    Block<int> b1(1, a);
-    Block<int> b2(2, b);
-    Block<int> b3(3, c);
-
-    printBlock(b1);
-    printBlock(b2);
-    printBlock(b3);
-
-    blockchain.AddBlock(b1);
-    blockchain.AddBlock(b2);
-    blockchain.AddBlock(b3);
+    printBlocks(blocks);
+    writeFile(blocks);
 
     return 0;
 }
 
 template <typename DataType>
-void printBlock(Block<DataType> & b)
+void printBlocks(std::vector<Block<DataType>> & vec)
 {
-    std::cout << "Block " << b.getIndex() << " contains " << b.getData() << std::endl;
-    std::cout << "    Hash: " << b.GetHash() << std::endl;
+    for (Block<DataType> b : vec)
+    {
+        std::cout << "Block " << b.getIndex() << " contains " << b.getData() << std::endl;
+        std::cout << "    Hash: " << b.GetHash() << std::endl;
+    }
+}
+
+template <typename DataType>
+void writeFile(std::vector<Block<DataType>> & vec)
+{
+    std::ofstream file(FILENAME);
+
+    for (Block<DataType> b : vec)
+        file << b.getIndex() << " " << b.getData() << " " << b.GetHash() << "\n";
+    
+    file.close();
 }

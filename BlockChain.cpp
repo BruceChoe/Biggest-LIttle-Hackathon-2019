@@ -18,10 +18,3 @@ template <typename DataType>
 Block<DataType> Blockchain<DataType>::_GetLastBlock() const {
 	return _vChain.back();
 }
-
-template <typename DataType>
-bool Blockchain<DataType>::checkValid()
-{
-	return _GetLastBlock().GetHash() == myMap.getLastHash();	
-	
-}
