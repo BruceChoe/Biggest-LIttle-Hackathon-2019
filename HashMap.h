@@ -24,11 +24,14 @@ public:
 		return tail;
 	}
 	
+	
+	
 	void printMap(ostream& os)
 	{
 		std::map<std::string, DataType>::iterator it = m.begin();
 		while (it != m.end()) {
-			os << it->second.DataType << " ";
+			os << "Hash: " << it->first.string << " ";
+			os << "With Data: " <<it->second.DataType << " ";
 			it++;
 		}
 		os << "\n";
