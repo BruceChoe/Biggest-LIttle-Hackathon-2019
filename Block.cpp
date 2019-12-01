@@ -3,44 +3,23 @@
 #include "Blockchain.h"
 #include "sha256.h"
 #include <time.h>
-#include "FI.h"
-#include "ThirdParty.h"
-#include "Report.h"
 #define nDifficulty 4
 
-/*
-Block::Block()
-{
-	_nIndex = -1;
-	ThirdParty dtpID;
-	FI deffID;
-	Report defDocs;
-	fiID = deffID;
-	tpID = dtpID;
-	reportDocs = defDocs;
-}
-*/
-
-/*
-Block::Block(uint32_t nIndexIn, Report& rReportDocsIn)
-	: _nIndex(nIndexIn), fiID(rReportDocsIn.FI_ID), tpID(rReportDocsIn.ThirdParty_ID), reportDocs(rReportDocsIn)
-{
-
-}
-*/
-
-Block::Block(uint32_t nIndexIn, FI& fiIDIn, ThirdParty& tpIDIn, Report& rReportDocsIn)
-	: _nIndex(nIndexIn), fiID(fiIDIn), tpID(tpIDIn), reportDocs(rReportDocsIn)
+template <class DataType>
+Block<DataType>::Block(uint32_t nIndexIn, DataType& inputData)
+	: _nIndex(nIndexIn), data(inputData)
 {
 	_nNonce = -1;
 	_tTime = time(nullptr);
 }
 
-string Block::GetHash() {
+template <class DataType>
+string Block<DataType>::GetHash() {
 	return _sHash;
 }
 
-void Block::MineBlock() {
+template <class Datatype>
+void Block<DataType>::MineBlock() {
 	char cstr[nDifficulty + 1];
 	for (uint32_t i = 0; i < nDifficulty; ++i) {
 		cstr[i] = '0';
@@ -56,16 +35,19 @@ void Block::MineBlock() {
 	cout << "Block mined: " << _sHash << endl;
 }
 
-inline string Block::_CalculateHash() const {
+template <class DataType>
+inline string Block<DataType>::_CalculateHash() const {
 	std::stringstream ss;
-	ss << _nIndex << _tTime << _nNonce << sPrevHash << fiID.getID() << tpID.getID();
+	ss << _nIndex << _tTime << _nNonce << sPrevHash <<;
 	return sha256(ss.str());
 }
 
-uint32_t Block::getIndex() {
+template <class DataType>
+uint32_t Block<DataType>::getIndex() {
 	return _nIndex;
 }
 
-Report& Block::getReport() {
+template <class DataType>
+DataType& Block<DataType>::getReport() {
 	return reportDocs;
 }
