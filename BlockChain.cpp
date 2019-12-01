@@ -7,7 +7,7 @@ Blockchain<DataType>::Blockchain() {
 }
 
 template <typename DataType>
-void Blockchain<DataType>::AddBlock(Block<DataType> bNew) {
+void Blockchain<DataType>::AddBlock(Block<DataType> & bNew) {
 	bNew.sPrevHash = _GetLastBlock().GetHash();
 	bNew.MineBlock();
 	_vChain.push_back(bNew);
