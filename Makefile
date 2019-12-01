@@ -19,3 +19,6 @@ $(TARGET): Sha256.o main.o
 clean:
 	rm -rf *.o
 	rm -rf $(TARGET)
+	
+cleantxt:
+	rm -rf *.txt
