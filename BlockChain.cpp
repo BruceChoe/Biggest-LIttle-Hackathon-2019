@@ -20,8 +20,8 @@ Block<DataType> Blockchain<DataType>::_GetLastBlock() const {
 }
 
 template <typename DataType>
-bool BlockChain<DataType>::checkValid()
+bool Blockchain<DataType>::checkValid()
 {
-	return _GetLastBlack().GetHash() == myMap.getLastHash();	
+	return _GetLastBlock().GetHash() == myMap.getLastHash();	
 	
 }
