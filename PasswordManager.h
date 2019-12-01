@@ -6,7 +6,7 @@
 
 
 template <class DataType>
-class PasswordManager
+class Keys
 {
 public:
 	void generateEncryptionKey(std::string encryptedPass); //Two different keys will be made using this hashing method
