@@ -12,7 +12,7 @@ template <typename DataType>
 class Blockchain {
 public:
 	Blockchain();
-    Block<DataType> _GetLastBlock() const;
+    	Block<DataType> _GetLastBlock() const;
 	void AddBlock(Block<DataType> bNew);
 	HashMap<DataType> myMap;
 private:
