@@ -16,7 +16,7 @@ int main()
     int privateKey = 7919;
     cout << "Here are 2 prime numbers, meant to show the concept of private and public keys\n";
     cout << "Public Key: " << publicKey << "\n";
-    cout << "Private Key:" << privateKey << "\n";    
+    cout << "Private Key: " << privateKey << "\n";    
     cout << "When asked to, input either key in order to have access to certain permissions of the given key\n";
     int option;    
     int i = 1; //i is an iterator for the position in the block chain
