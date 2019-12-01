@@ -15,6 +15,7 @@ public:
     Block<DataType> _GetLastBlock() const;
 	void AddBlock(Block<DataType> & bNew);
 	HashMap<DataType> myMap;
+	bool checkValid();
 private:
 	uint32_t _nDifficulty;
 	vector<Block<DataType>> _vChain;
