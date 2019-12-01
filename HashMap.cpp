@@ -10,7 +10,7 @@ class HashMap {
 private:
 	std::map<std::string, DataType> m; //m is the map
 	string tail; 
-
+	
 public:
 	void Insert(string hash, Report report)
 	{
@@ -18,7 +18,12 @@ public:
 		tail = hash;
 
 	}
-
+	
+	string getLastHash()
+	{
+		return tail;
+	}
+	
 	void printMap(ostream& os)
 	{
 		std::map<std::string, DataType>::iterator it = m.begin();
