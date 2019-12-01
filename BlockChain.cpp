@@ -2,7 +2,7 @@ template <typename DataType>
 Blockchain<DataType>::Blockchain() {
 	DataType data;
 
-	_vChain.emplace_back(Block(0, data));
+	_vChain.emplace_back(Block<DataType>(0, data));
 	_nDifficulty = 6;
 }
 

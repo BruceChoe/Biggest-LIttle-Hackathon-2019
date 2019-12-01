@@ -1,8 +1,3 @@
-#pragma once
-#include "Block.h"
-#include "Blockchain.h"
-#include "sha256.h"
-#include <time.h>
 #define nDifficulty 4
 
 template <class DataType>
@@ -18,7 +13,7 @@ string Block<DataType>::GetHash() {
 	return _sHash;
 }
 
-template <class Datatype>
+template <class DataType>
 void Block<DataType>::MineBlock() {
 	char cstr[nDifficulty + 1];
 	for (uint32_t i = 0; i < nDifficulty; ++i) {
@@ -38,7 +33,7 @@ void Block<DataType>::MineBlock() {
 template <class DataType>
 inline string Block<DataType>::_CalculateHash() const {
 	std::stringstream ss;
-	ss << _nIndex << _tTime << _nNonce << sPrevHash <<;
+	ss << _nIndex << _tTime << _nNonce << sPrevHash;
 	return sha256(ss.str());
 }
 
@@ -48,6 +43,6 @@ uint32_t Block<DataType>::getIndex() {
 }
 
 template <class DataType>
-DataType& Block<DataType>::getReport() {
-	return reportDocs;
+DataType& Block<DataType>::getData() {
+	return data;
 }

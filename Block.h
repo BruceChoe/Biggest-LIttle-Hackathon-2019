@@ -5,7 +5,8 @@
 #include <iostream>
 #include <cstdint>
 #include <sstream>
-
+#include "sha256.h"
+#include <time.h>
 
 using namespace std;
 /*
@@ -30,4 +31,6 @@ private:
 
 	string _CalculateHash() const;
 };
+
+#include "Block.cpp"
 #endif

@@ -28,7 +28,8 @@ public:
 	
 	void printMap(ostream& os)
 	{
-		std::map<std::string, DataType>::iterator it = m.begin();
+		//std::map<std::string, DataType>::iterator it = m.begin();
+		auto it = m.begin();
 		while (it != m.end()) {
 			os << "Hash: " << it->first.string << " ";
 			os << "With Data: " <<it->second.DataType << " ";

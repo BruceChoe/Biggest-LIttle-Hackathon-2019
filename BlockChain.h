@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 #include "Block.h"
-#include "HashMap.cpp"
+#include "HashMap.h"
 
 using namespace std;
 

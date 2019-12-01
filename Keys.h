@@ -3,7 +3,8 @@
 #include <map>
 #include <iostream>
 #include <utility>
-
+#include <random>
+#include <ctime>
 
 template <class DataType>
 class Keys
@@ -21,3 +22,5 @@ private:
 	long int prime(long int pr);
 
 };
+
+#include "Keys.cpp"
