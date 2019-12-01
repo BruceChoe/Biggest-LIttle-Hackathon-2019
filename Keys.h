@@ -11,9 +11,8 @@ class Keys
 {
 public:
 	void generateEncryptionKey(std::string hash); //Two different keys will be made using this hashing method
-	
-	long int getPrivateKey() {return publicKey;}
-	long int getPublicKey() {return encryped;}
+	char* getPrivateKey() {return encrypted;}
+	long int* getPublicKey() {return publicKey;}
 
 private:
 	
