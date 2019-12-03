@@ -28,6 +28,7 @@ public:
 	
 	void printMap(ostream& os)
 	{
+		os << "\nPrinting out map according to lowest to greatest hash signature\n" 
 		//std::map<std::string, DataType>::iterator it = m.begin();
 		auto it = m.begin(); //iterator starting at the start of the map
 		while (it != m.end()) {
