@@ -4,8 +4,8 @@
 #include "Keys.h"
 const char * FILENAME = "blocks.txt";
 
-template <typename DataType> void printBlocks(std::vector<Block<DataType>> & vec);
-template <typename DataType> void writeFile(std::vector<Block<DataType>> & vec);
+template <typename DataType> void printBlocks(Blockchain<DataType> & blockchain, ostream &os);
+template <typename DataType> void writeFile(Blockchain<DataType> & blockchain);
 
 int main()
 {
@@ -28,7 +28,7 @@ int main()
         cout << "(1) Add something to the Block Chain\n(2) Look at the Block Chain\n(3) Check if Block Chain has been manipulated\n(4) Write the existing Block Chain to the file\n(5) To exit\n";
         cout << "Enter in your option: ";
         cin >> option;
-        int key; //This is the key that they are going to manually insert
+        int key; //This is the key the user enters
         int value;
         cout << "\n\n";
         
@@ -60,7 +60,7 @@ int main()
                 cout << "Enter in key: ";
                 cin >> key;
                 if (key == publicKey || key == privateKey)
-                   printBlocks(blocks);
+                   printBlocks(blockchain, std::cout);
                 else
                     cout << "Key not detected\n";
                 break; //case 2
@@ -85,7 +85,7 @@ int main()
                 else if (key == privateKey)
                 {
                     cout << "All of the blocks are now written into the file blocks.txt\n";
-                    writeFile(blocks);
+                    writeFile(blockchain);
                 }
                 else
                     cout << "Key not detected\n";
@@ -110,22 +110,26 @@ int main()
 }
 
 template <typename DataType>
-void printBlocks(std::vector<Block<DataType>> & vec)
+void printBlocks(Blockchain<DataType> & blockchain, ostream &os)
 {
+    blockchain.myMap.printMap(os);
+/*
     for (Block<DataType> b : vec)
     {
         std::cout << "Block " << b.getIndex() << " contains " << b.getData() << std::endl;
         std::cout << "    Hash: " << b.GetHash() << std::endl;
     }
+*/
 }
 
 template <typename DataType>
-void writeFile(std::vector<Block<DataType>> & vec)
+void writeFile(Blockchain<DataType> & blockchain)
 {
     std::ofstream file(FILENAME);
-
+    blockchain.myMap.printMap(file);
+/*
     for (Block<DataType> b : vec)
         file << b.getIndex() << " " << b.getData() << " " << b.GetHash() << "\n";
-    
+*/
     file.close();
 }
