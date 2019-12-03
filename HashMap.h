@@ -9,19 +9,19 @@ template <class DataType>
 class HashMap {
 private:
 	std::map<std::string, DataType> m; //m is the map
-	string tail; 
+	string tail; //the last hash (useful for checking if valid)
 	
 public:
 	void Insert(string hash, DataType data)
 	{
-		m.emplace(hash, data);
-		tail = hash;
+		m.emplace(hash, data); //Emplaces new data into the map
+		tail = hash; //makes the tail equal to a hash, each insertion it is now making the tail equal to the newest hash
 
 	}
 	
 	string getLastHash()
 	{
-		return tail;
+		return tail; //gets the last hash, in this case just the tail is all we need
 	}
 	
 	
@@ -29,7 +29,7 @@ public:
 	void printMap(ostream& os)
 	{
 		//std::map<std::string, DataType>::iterator it = m.begin();
-		auto it = m.begin();
+		auto it = m.begin(); //iterator starting at the start of the map
 		while (it != m.end()) {
 			os << "Hash: " << it->first.string << " ";
 			os << "With Data: " <<it->second.DataType << " ";
