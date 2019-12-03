@@ -31,9 +31,10 @@ public:
 		//std::map<std::string, DataType>::iterator it = m.begin();
 		auto it = m.begin(); //iterator starting at the start of the map
 		while (it != m.end()) {
-			os << "Hash: " << it->first.string << " ";
-			os << "With Data: " <<it->second.DataType << " ";
+			os << "Hash: " << it->first << " ";
+			os << "With Data: " <<it->second << " ";
 			it++;
+			os << "\n";
 		}
 		os << "\n";
 	}
