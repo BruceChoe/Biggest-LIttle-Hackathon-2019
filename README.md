@@ -1,7 +1,7 @@
 # Biggest-Little-Hackathon-2019
 # Authors: Bruce Choe, Daniel Enriquez, Erik Marsh
 
-Code for the Biggest Little Hackathon project hosted by Reno's ACM on 11/9/19.
+Code for the Biggest Little Hackathon project hosted by Reno's ACM on 11/9/19. 24 hour time limit. 
 Code project specifications: https://www.topcoder.com/challenges/30064433
 
 Goal: Leverage the due diligence reviews done on third parties that have been completed by other FIs. Design a blockchain-based solution that would allow FIs to publish their third-party due diligence on a distributed ledger to be leveraged and added to by other FIs.
