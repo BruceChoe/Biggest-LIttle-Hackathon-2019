@@ -7,7 +7,7 @@ CXX_FLAGS = -Wall -std=c++11
 
 all: $(TARGET)
 
-Sha256.o: Sha256.cpp Keys.cpp
+Sha256.o: Sha256.cpp Keys.cpp BlockChain.cpp Block.cpp
 	$(CXX) $(CXX_FLAGS) -c $< -o $@
 
 main.o: main.cpp $(HEADERS)
