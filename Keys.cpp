@@ -1,9 +1,9 @@
 template <class DataType>
-void Keys<DataType>::generateEncryptionKey(std::string hash) //Meant to generate an encryption key based upon receiving a ahsh
+void Keys<DataType>::generateEncryptionKey(std::string hash) //Meant to generate an encryption key based upon receiving a hash
 {
-	long int firstPrime, secondPrime; //2 random prime numbers
-	firstPrime = 12809;
-	secondPrime = 18371;
+	long int firstPrime, secondPrime; // 2 prime numbers
+	firstPrime = 12809; // Using hardcoded prime numbers since generating random primes is computationally very expensive 
+	secondPrime = 18371; // Considered using Sieve of Eratosthenes and randomly selecting a prime, decidided it was not necessary given scope of project. 
 	for (i = 0; hash[i] != NULL; i++)
 		hash[i] = hash[i];
 	keyModulus = firstPrime * secondPrime; //Creates a modulo for the key by multiplying them
@@ -47,7 +47,7 @@ void Keys<DataType>::generateEncryptionKey(std::string hash) //Meant to generate
 		temp[i] = actualKey;
 		ct = actualKey + 96;
 		encrypted[i] = static_cast<char>(ct);
-		i++; 																						//64
+		i++; //64
 	}//endwhile
 	encrypted[i] = -1;
 	pt = 0, ct = 0, key = publicKeyInverse[0], actualKey = 0;
