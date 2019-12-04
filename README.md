@@ -8,6 +8,7 @@ The design was approved by Dr.Kostas Alexis, and follows these specifications:
 3. Use public private key matching to access and manipulate the blockchain.
 4. Verify the integrity of the blockchain by checking if the chain has been manipulated 
 5. Templates
+
 The program's output and further documentation can be found in "log.pdf" 
 Refer to blocks.txt for the file output of the blockchain. 
 
