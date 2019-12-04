@@ -1,21 +1,21 @@
 template <class DataType>
-void Keys<DataType>::generateEncryptionKey(std::string hash)
+void Keys<DataType>::generateEncryptionKey(std::string hash) //Meant to generate an encryption key based upon receiving a ahsh
 {
-	long int firstPrime, secondPrime;
+	long int firstPrime, secondPrime; //2 random prime numbers
 	firstPrime = 12809;
 	secondPrime = 18371;
 	for (i = 0; hash[i] != NULL; i++)
 		hash[i] = hash[i];
-	keyModulus = firstPrime * secondPrime;
-	totientFunction = (firstPrime - 1) * (secondPrime - 1);
+	keyModulus = firstPrime * secondPrime; //Creates a modulo for the key by multiplying them
+	totientFunction = (firstPrime - 1) * (secondPrime - 1); //Creates a totient function based off of the primes - 1
 
 	long int key;
 	key = 0;
 	for (i = 2; i < totientFunction; i++)
 	{
 		if (totientFunction % i == 0)
-			continue;
-		flag = prime(i);
+			continue; //Goes to the next iteration of the for loop
+		flag = prime(i); //Checks for when the flag is prime
 		if (flag == 1 && i != firstPrime && i != secondPrime)
 		{
 			publicKey[key] = i;
@@ -26,7 +26,7 @@ void Keys<DataType>::generateEncryptionKey(std::string hash)
 				key++;
 			} //endif
 			if (key == 99)
-				break;
+				break; //Breaks out of for loop
 		}//endif
 	} //endfor
 	long int pt, ct, actualKey, len;
