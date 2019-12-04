@@ -1,96 +1,86 @@
-template <class DataType>
-void Keys<DataType>::generateEncryptionKey(std::string hash) //Meant to generate an encryption key based upon receiving a hash
-{
-	long int firstPrime, secondPrime; // 2 prime numbers
-	firstPrime = 12809; // Using hardcoded prime numbers since generating random primes is computationally very expensive 
-	secondPrime = 18371; // Considered using Sieve of Eratosthenes and randomly selecting a prime, decidided it was not necessary given scope of project. 
-	for (i = 0; hash[i] != NULL; i++)
-		hash[i] = hash[i];
-	keyModulus = firstPrime * secondPrime; //Creates a modulo for the key by multiplying them
-	totientFunction = (firstPrime - 1) * (secondPrime - 1); //Creates a totient function based off of the primes - 1
+#pragma once
 
-	long int key;
-	key = 0;
-	for (i = 2; i < totientFunction; i++)
+#include <map>
+#include <iostream>
+#include <utility>
+#include <random>
+#include <ctime>
+
+//#include "Keys.h"
+void generateKeys(int firstPrime, int secondPrime, int &encryption, int &decryption)
+{
+	
+	
+	int j = (firstPrime-1)*(secondPrime-1);
+	
+	int rPrime = 1;
+	int d = 1;
+	
+	rPrime = relativelyPrime(j);
+	d = inverse(rPrime, j);
+	
+	encryption = rPrime;
+	decryption = d;
+}
+
+int relativelyPrime (int num)
+{
+	int x = 0;
+	int GCD = 0;
+	int divisor = 0;
+	for (int i = 2; i < num; ++i)
 	{
-		if (totientFunction % i == 0)
-			continue; //Goes to the next iteration of the for loop
-		flag = prime(i); //Checks for when the flag is prime
-		if (flag == 1 && i != firstPrime && i != secondPrime)
+		for(int n = 1; n <=i;n++)
 		{
-			publicKey[key] = i;
-			flag = cd(publicKey[key]);
-			if (flag > 0)
+			if (i%n == 0)
+				divisor++;
+		} //end n for
+		if (divisor == 2)
+		{
+			GCD = GreatestCommonDenominator(i, num);
+			if (GCD == 1)
 			{
-				publicKeyInverse[key] = flag;
-				key++;
-			} //endif
-			if (key == 99)
-				break; //Breaks out of for loop
-		}//endif
-	} //endfor
-	long int pt, ct, actualKey, len;
-	key = publicKey[0];
-	i = 0;
-	len = hash.length();
-
-	while (i != len)
-	{
-		pt = static_cast<long int>(decrypted[i]);
-		pt = pt - 96;
-		actualKey = 1;
-		for (maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
-		{
-			actualKey = actualKey * pt;
-			actualKey = actualKey % keyModulus;
-		}//endfor
-		temp[i] = actualKey;
-		ct = actualKey + 96;
-		encrypted[i] = static_cast<char>(ct);
-		i++; //64
-	}//endwhile
-	encrypted[i] = -1;
-	pt = 0, ct = 0, key = publicKeyInverse[0], actualKey = 0;
-	i = 0;
-	while (encrypted[i] != -1)
-	{
-		ct = temp[i];
-		actualKey = 1;
-		for (maxValOfKey = 0; maxValOfKey < key; maxValOfKey++)
-		{
-			actualKey = actualKey * ct;
-			actualKey = actualKey % keyModulus;
-		}//endfor
-		pt = actualKey + 96;
-		decrypted[i] = static_cast<char>(pt);
-		i++;
-	}//endwhile
-	decrypted[i] = -1;
-
-}//end generateEncryptionKey
-
-
-template <class DataType>
-long int Keys<DataType>::cd(long int a)
-{
-	long int key = 1;
-	while (1)
-	{
-		key = key + totientFunction;
-		if (key % a == 0)
-			return(key / a);
-	}
+				x = i;
+				break;
+			} //end FDC if
+			else
+				divisor = 0;
+		} //end divisor if
+		else
+			divisor = 0;
+	} //end i for
+	return x;
 }
 
-template <class DataType>
-long int Keys<DataType>::prime(long int pr)
+int GreatestCommonDenominator(int num1, int num2)
 {
-	long int i;
-	maxValOfKey = sqrt(pr);
-	for (i = 2; i <= maxValOfKey; i++)
+	int x = num1;
+	int y = num2;
+	
+	while (y != 0)
 	{
-		if (pr % i == 0)
-			return 0;
-	}
-	return 1;
+		int z = (x%y);
+		x=y;
+		y=z;
+	} //end while
+	return x;
 }
+
+int inverse(int num1, int modulus)
+{
+	int x = 0;
+	int y = 0;
+	for (int i = 0; i < modulus;i++)
+	{
+		y = ((i*num1)%modulus);
+		if (y == 1)
+		{
+			x = i;
+			break;
+		}
+	}
+	return x;
+}
+
+
+
