@@ -6,6 +6,8 @@ const char * FILENAME = "blocks.txt";
 
 template <typename DataType> void printBlocks(Blockchain<DataType> & blockchain, ostream &os);
 template <typename DataType> void writeFile(Blockchain<DataType> & blockchain);
+bool isPrime(int number);
+int generatePrime();
 
 int main()
 {
@@ -18,6 +20,19 @@ int main()
     cout << "Public Key: " << publicKey << "\n";
     cout << "Private Key: " << privateKey << "\n";    
     cout << "When asked to, input either key in order to have access to certain permissions of the given key\n";
+    
+	int decryptedPrivateKey;
+	int encryptedPrivateKey;
+	int decryptedPublicKey;
+	int encryptedPublicKey;
+	srand(time(NULL)); //Sets the random seed to be equal to the time
+	cout << "Generating Keys\n";
+	generateKeys(generatePrime(), generatePrime(), encryptedPrivateKey, decryptedPrivateKey);
+	generateKeys(generatePrime(), generatePrime(), encryptedPublicKey, decryptedPublicKey);
+	cout << "Decrypted Private Key: " << decryptedPrivateKey << "\nEncrypted Private Key: " << encryptedPrivateKey << endl;
+	cout << "Decrypted Public Key: " << decryptedPublicKey << "\nEncrypted Public Key: " << encryptedPublicKey << endl;
+    
+    
     int option;    
     int i = 1; //i is an iterator for the position in the block chain
     do {
@@ -132,4 +147,25 @@ void writeFile(Blockchain<DataType> & blockchain)
         file << b.getIndex() << " " << b.getData() << " " << b.GetHash() << "\n";
 */
     file.close();
+}
+
+
+int generatePrime()
+{
+	int num = rand() % 10000;
+	while (1) //Brute force generation method
+	{
+	num++;
+	if (isPrime(num))
+		return num;
+	}
+}
+bool isPrime(int number)
+{
+	for (int i = 2; i <= number/2; i++)
+	{
+		if (number%i == 0)
+			return false;
+	}
+	return true;
 }
