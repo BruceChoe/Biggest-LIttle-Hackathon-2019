@@ -13,74 +13,62 @@ int main()
 {
     Blockchain<int> blockchain;
     std::vector<Block<int>> blocks;
-   
-    int privateKey = 17;
-	int publicKey = 7919;
-    cout << "Here are 2 prime numbers, meant to show the concept of private and public keys\n";
-    cout << "Public Key: " << publicKey << "\n";
-    cout << "Private Key: " << privateKey << "\n";    
-    cout << "When asked to, input either key in order to have access to certain permissions of the given key\n";
-    
-	int decryptedPrivateKey;
-	int encryptedPrivateKey;
-	int decryptedPublicKey;
-	int encryptedPublicKey;
+	int decryptedPrivateKey, decryptedPublicKey;
+	int encryptedPrivateKey, encryptedPublicKey;
 	srand(time(NULL)); //Sets the random seed to be equal to the time
-	cout << "Generating Keys\n";
+
+    cout << endl << "For demonstration purposes, we'll generate random public and private keys for you. ";    
 	generateKeys(generatePrime(), generatePrime(), encryptedPrivateKey, decryptedPrivateKey);
 	generateKeys(generatePrime(), generatePrime(), encryptedPublicKey, decryptedPublicKey);
-	cout << "Decrypted Private Key: " << decryptedPrivateKey << "\nEncrypted Private Key: " << encryptedPrivateKey << endl;
-	cout << "Decrypted Public Key: " << decryptedPublicKey << "\nEncrypted Public Key: " << encryptedPublicKey << endl;
-    
-    
+	//cout << "Decrypted Private Key: " << decryptedPrivateKey << "\nEncrypted Private Key: " << encryptedPrivateKey << endl;
+	//cout << "Decrypted Public Key: " << decryptedPublicKey << "\nEncrypted Public Key: " << encryptedPublicKey << endl;
+
+    int key; //This is the user input
+    //cout << "Use your encrypted keys to interface with the blockchain." << endl;
+
     int option;    
     int i = 1; //i is an iterator for the position in the block chain
     do {
-        cout << "\n\n";
+        cout << "\n";
         cout << "Your keys:\n";
-        cout << "Public Key: " << publicKey << "\n";
-        cout << "Private Key:" << privateKey << "\n";
-        cout << "(1) Add something to the Block Chain\n(2) Look at the Block Chain\n(3) Check if Block Chain has been manipulated\n(4) Write the existing Block Chain to the file\n(5) To exit\n";
+        cout << "Public Key: " << decryptedPublicKey << "\n";
+        cout << "Private Key: " << decryptedPrivateKey << "\n";
+        cout << "(1) Add a block to the Block Chain\n(2) View the Block Chain\n(3) Check if Block Chain has been manipulated\n(4) Write the existing Block Chain to the file\n(5) Exit\n";
         cout << "Enter in your option: ";
         cin >> option;
-        int key; //This is the key the user enters
         int value;
-        cout << "\n\n";
+        cout << "\n";
         
         switch (option)
         {
             case 1: //Add to the block chain
-                cout << "Enter in key: ";
+                cout << "Enter in your private key: ";
                 cin >> key;
-                if (key == publicKey)
-                    cout << "Error: Can not enter data into Block Chain using public key\n";
-                else if (key == privateKey)
+                if (key == decryptedPublicKey)
+                    cout << "Error: Unable to sign block using public key. Please use your private key.\n";
+                else if (key == decryptedPrivateKey)
                 {
                     cout << "Permission granted\n";
                     cout << "Add an integer value to the Block Chain: ";
                     cin >> value;
-                    cout << "Adding value " << value << " to the Block Chain to location " << i <<"\n";
-                    Block<int> temp(i, value);
-                    blockchain.AddBlock(temp);
-                    blocks.push_back(temp);
-                    i++;
+                    if (value <= 2147483647 || value >= -2147483648)
+                    {
+                        cout << "Adding value " << value << " to the Block Chain at location " << i <<"\n";
+                        Block<int> temp(i, value);
+                        blockchain.AddBlock(temp);
+                        blocks.push_back(temp);
+                        i++;
+                    }
+                    else
+                        cout << "Value exceeds allowable integer limits.\n";
                 }
                 else
-                    cout << "Key not detected\n";
+                    cout << "Invalid Key\n";
                 break; //case 1
 
-
-
             case 2: //prints out all of the blocks
-                cout << "Enter in key: ";
-                cin >> key;
-                if (key == publicKey || key == privateKey)
-                   printBlocks(blockchain, std::cout);
-                else
-                    cout << "Key not detected\n";
+                printBlocks(blockchain, std::cout);
                 break; //case 2
-
-
 
             case 3: //Checks if chain is valid or not
                 if (blockchain.checkValid())
@@ -89,32 +77,15 @@ int main()
                     cout << "Block Chain is invalid\n";
                 break; //case 3
 
-
-
-
             case 4: //Prints the block chain to an existing file
-                cout << "Enter in key: ";
-                cin >> key;
-                if (key == publicKey)
-                    cout << "Error: Can not enter data into block chain using public key\n";
-                else if (key == privateKey)
-                {
-                    cout << "All of the blocks are now written into the file blocks.txt\n";
-                    writeFile(blockchain);
-                }
-                else
-                    cout << "Key not detected\n";
+                 cout << "All of the blocks are now written into the file blocks.txt\n";
+                 writeFile(blockchain);
                 break; //case 4
-
-
-
 
             case 5: //exit case
                 cout << "Bye!\n";
                 return 1;
                 break; //case 5
-
-
 
             default:
                 cout <<"Error, invalid input\n";
@@ -128,13 +99,6 @@ template <typename DataType>
 void printBlocks(Blockchain<DataType> & blockchain, ostream &os)
 {
     blockchain.myMap.printMap(os);
-/*
-    for (Block<DataType> b : vec)
-    {
-        std::cout << "Block " << b.getIndex() << " contains " << b.getData() << std::endl;
-        std::cout << "    Hash: " << b.GetHash() << std::endl;
-    }
-*/
 }
 
 template <typename DataType>
@@ -142,13 +106,8 @@ void writeFile(Blockchain<DataType> & blockchain)
 {
     std::ofstream file(FILENAME);
     blockchain.myMap.printMap(file);
-/*
-    for (Block<DataType> b : vec)
-        file << b.getIndex() << " " << b.getData() << " " << b.GetHash() << "\n";
-*/
     file.close();
 }
-
 
 int generatePrime()
 {
