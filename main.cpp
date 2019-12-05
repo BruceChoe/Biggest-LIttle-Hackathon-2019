@@ -1,7 +1,16 @@
+/*
+*   CS302 Bonus Project Submission. 
+*   Authors: Bruce Choe, Daniel Enriquez, Erik Marsh. 
+*   View the Readme for project specs
+*   View log.pdf for project output
+*   Executable name after compiling: hashing
+*/
+
 #include <iostream>
 #include <fstream>
 #include "BlockChain.h"
 #include "Keys.h"
+#include <limits>
 const char * FILENAME = "blocks.txt";
 
 template <typename DataType> void printBlocks(Blockchain<DataType> & blockchain, ostream &os);
@@ -17,17 +26,15 @@ int main()
 	int encryptedPrivateKey, encryptedPublicKey;
 	srand(time(NULL)); //Sets the random seed to be equal to the time
 
+    // Generate public and private keys, both encypted and decrypted. 
     cout << endl << "For demonstration purposes, we'll generate random public and private keys for you. ";    
 	generateKeys(generatePrime(), generatePrime(), encryptedPrivateKey, decryptedPrivateKey);
 	generateKeys(generatePrime(), generatePrime(), encryptedPublicKey, decryptedPublicKey);
-	//cout << "Decrypted Private Key: " << decryptedPrivateKey << "\nEncrypted Private Key: " << encryptedPrivateKey << endl;
-	//cout << "Decrypted Public Key: " << decryptedPublicKey << "\nEncrypted Public Key: " << encryptedPublicKey << endl;
-
-    int key; //This is the user input
-    //cout << "Use your encrypted keys to interface with the blockchain." << endl;
 
     int option;    
     int i = 1; //i is an iterator for the position in the block chain
+    int value = 0;
+    int key = 0;
     do {
         cout << "\n";
         cout << "Your keys:\n";
@@ -36,34 +43,50 @@ int main()
         cout << "(1) Add a block to the Block Chain\n(2) View the Block Chain\n(3) Check if Block Chain has been manipulated\n(4) Write the existing Block Chain to the file\n(5) Exit\n";
         cout << "Enter in your option: ";
         cin >> option;
-        int value;
+        // Sanitize input
+        if(!cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
         cout << "\n";
         
         switch (option)
         {
-            case 1: //Add to the block chain
+            case 1: // Add block to chain using private key
                 cout << "Enter in your private key: ";
                 cin >> key;
-                if (key == decryptedPublicKey)
+                if(!cin) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                }
+                if (key == decryptedPublicKey) 
+                {
                     cout << "Error: Unable to sign block using public key. Please use your private key.\n";
+                }
                 else if (key == decryptedPrivateKey)
                 {
                     cout << "Permission granted\n";
                     cout << "Add an integer value to the Block Chain: ";
                     cin >> value;
-                    if (value <= 2147483647 || value >= -2147483648)
+                    if(!cin)
                     {
-                        cout << "Adding value " << value << " to the Block Chain at location " << i <<"\n";
-                        Block<int> temp(i, value);
-                        blockchain.AddBlock(temp);
-                        blocks.push_back(temp);
-                        i++;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                        cout << "Invalid data entry." << endl;
+                        break;
                     }
-                    else
-                        cout << "Value exceeds allowable integer limits.\n";
+                    // Add block to chain
+                    cout << "Adding value " << value << " to the Block Chain at location " << i <<"\n";
+                    Block<int> temp(i, value);
+                    blockchain.AddBlock(temp);
+                    blocks.push_back(temp);
+                    i++;
                 }
                 else
+                {
                     cout << "Invalid Key\n";
+                }
                 break; //case 1
 
             case 2: //prints out all of the blocks
@@ -95,12 +118,14 @@ int main()
     return 0;
 }
 
+// Print blockchain hash map to terminal. Note: blockchain is printed in order of lowest to greatest hash signature, NOT chronologically. 
 template <typename DataType>
 void printBlocks(Blockchain<DataType> & blockchain, ostream &os)
 {
     blockchain.myMap.printMap(os);
 }
 
+// Write blockchain to file
 template <typename DataType>
 void writeFile(Blockchain<DataType> & blockchain)
 {
@@ -109,6 +134,7 @@ void writeFile(Blockchain<DataType> & blockchain)
     file.close();
 }
 
+// Lowest overhead cost of generating a random prime
 int generatePrime()
 {
 	int num = rand() % 10000;
@@ -119,6 +145,8 @@ int generatePrime()
 		return num;
 	}
 }
+
+// Simple primality test
 bool isPrime(int number)
 {
 	for (int i = 2; i <= number/2; i++)
