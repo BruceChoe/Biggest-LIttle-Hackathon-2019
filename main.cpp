@@ -14,6 +14,8 @@ int main()
     Blockchain<int> blockchain;
     std::vector<Block<int>> blocks;
    
+    int privateKey = 17;
+	int publicKey = 7919;
     cout << "Here are 2 prime numbers, meant to show the concept of private and public keys\n";
     cout << "Public Key: " << publicKey << "\n";
     cout << "Private Key: " << privateKey << "\n";    
