@@ -1,7 +1,7 @@
 TARGET = hashing
 HEADERS = Sha256.h Block.h BlockChain.h HashMap.h Keys.h
 CXX = g++
-CXX_FLAGS = -Wall -std=c++11
+CXX_FLAGS = -Wall -std=c++11 -Wno-sign-compare
 
 .PHONY: all clean
 
