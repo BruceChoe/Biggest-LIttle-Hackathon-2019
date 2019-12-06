@@ -11,5 +11,5 @@ The design was approved by Dr.Kostas Alexis, and follows these specifications:
 
 The program's output can be found in "log.pdf"
 
-Refer to blocks.txt for the file output of the blockchain.
+Refer to blocks.txt for the file output of the blockchain. Note: This wil only appear when you select the option to print out the blockchain to a seperate file
 
